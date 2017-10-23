@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Ocean City, Maryland Neighborhood Map</title>
+  </head>
+<body class="bg-dark">
+  <!-- navigation bar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+    <h1 class="navbar-brand mb-0">Ocean City, MD</h1>
+    <button class="navbar-toggler" type="button" data-toggle="offcanvas" data-target=".sidebar-nav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+  <!-- list of places -->
+  <div class="container-fluid">
+    <!-- list of places shown on map -->
+    <div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+        <div class="menu-container">
+          <input class="form-control mr-sm-2" type="text" placeholder="Filter" data-bind="value: placeFilter, valueUpdate: 'keyup'">
+          <ul class="list-group" data-bind="foreach: placesList">
+            <li class="list-group-item list-group-item-action"
+                data-bind="text: name,
+                           click: $parent.setCurrentPlace,
+                           css: {selected: $parent.currentPlace() && $parent.currentPlace().name === name},
+                           visible: is_visible"></li>
+          </ul>
+          <footer>
+            Place details provided by <a href="https://www.foursquare.com" target="_blank">Foursquare</a>
+          </footer>
+        </div>
+      </div>
+
+      <!-- google map -->
+      <div class="col-md-10">
+          <div id="map" class="map"></div>
+      </div>
+    </div>
+  </div>
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/knockout-3.4.2.js"></script>
+  <script src="js/app.js"></script>
+  <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC16Moc5hV9p7Kb258RX42c03mxzc7T3o4&v=3&callback=map.init">
+  </script>
+</body>
+</html>
