@@ -122,7 +122,7 @@ var FourSquare = function() {
     // ajax call failed for some reason. Set the place details to an empty
     // object and display only the name
     request.fail(function(data) {
-      placesList[place_idx].details = {};
+      placesList[place_idx].details = {error: 'Failed to load details from Foursquare'};
       map.showInfoWindow(place_idx);
     });
   };
@@ -131,11 +131,11 @@ var FourSquare = function() {
 // GOOGLE MAPS class
 var GoogleMap = function() {
   var self = this;
-  self.map;
+  self.map = null;
   self.center = {lat: 38.336503, lng: -75.084906};
-  self.bounds;
-  self.clicked_marker;
-  self.infoWindow;
+  self.bounds = null;
+  self.clicked_marker = null;
+  self.infoWindow = null;
   self.fs = new FourSquare();
 
   // initialize map and add the markers from the placesList
@@ -148,6 +148,11 @@ var GoogleMap = function() {
     self.bounds = new google.maps.LatLngBounds();
     self.infoWindow = new google.maps.InfoWindow();
     self.addMarkers();
+  };
+
+  self.loadError = function() {
+    console.log('map failed to load');
+    $("#map").html('<h1 class="error">Google Map failed to load</h1>');
   };
 
   self.centerMap = function() {
@@ -255,6 +260,9 @@ var GoogleMap = function() {
         if (place.details.url) {
           content += '<p><a href="' + place.details.url +
                      '" target="_blank">Visit Website</a></p>';
+        }
+        if (place.details.error) {
+          content += '<p>' + place.details.error + '</p>';
         }
       }
       content += '</div>';

@@ -50,6 +50,11 @@ footer {
   margin-top: 10px;
 }
 
+.error {
+  color: white;
+  text-align: center;
+}
+
 /* the list of places is hidden up to 767px */
 @media screen and (max-width: 767px) {
   .row-offcanvas {
@@ -58,6 +63,7 @@ footer {
     -moz-transition: all 0.25s ease-out;
     transition: all 0.25s ease-out;
   }
+
   .row-offcanvas-right
   .sidebar-offcanvas {
     right: -41.6%;
@@ -67,17 +73,21 @@ footer {
   .sidebar-offcanvas {
     left: -41.6%;
   }
+
   .row-offcanvas-right.active {
     right: 41.6%;
   }
+
   .row-offcanvas-left.active {
     left: 41.6%;
   }
+
   .sidebar-offcanvas {
     position: absolute;
     top: 0;
     width: 41.6%;
   }
+
   #sidebar {
     padding-top:0;
   }
